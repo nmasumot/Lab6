@@ -35,7 +35,7 @@ class JournalEntry extends HTMLElement {
             .entry-image {
                 height: 100%;
                 max-height: 350px;
-                max-width: 550px;
+                max-width: 550px;  
             }
             .entry-title {
                 margin-bottom: 5px;
@@ -73,6 +73,14 @@ class JournalEntry extends HTMLElement {
      */
     
     // CODE GOES HERE
+    const shadow = this.shadowRoot;
+    var title = shadow.querySelector(".entry-title");
+    title.innerHTML = entry.title;
+    var date = shadow.querySelector(".entry-date");
+    date.innerHTML = entry.date;
+    var content = shadow.querySelector(".entry-content");
+    content.innerHTML = entry.content;
+
 
     if (entry.image) {
       let entryImage;
@@ -84,8 +92,14 @@ class JournalEntry extends HTMLElement {
        */
 
       // CODE GOES HERE vvv
-
-
+      entryImage = document.createElement('img');
+      entryImage.setAttribute("class", "entry-image");
+      entryImage.setAttribute('src',entry.image.src);
+      entryImage.setAttribute('alt',entry.image.alt);
+      let article = shadow.querySelector('article');
+      article.appendChild(entryImage);
+      
+      
 
 
 
@@ -111,7 +125,12 @@ class JournalEntry extends HTMLElement {
 
       // CODE GOES HERE vvv
 
-
+      entryAudio = document.createElement("audio");
+      entryAudio.setAttribute('class','entry-audio');
+      entryAudio.setAttribute('src', entry.audio);
+      entryAudio.setAttribute('controls', true);
+      let article = shadow.querySelector('article');
+      article.appendChild(entryAudio);
 
 
 
